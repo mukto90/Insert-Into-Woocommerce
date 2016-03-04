@@ -94,4 +94,6 @@ class Insert_Into_Woocommerce {
 
 }
 
-new Insert_Into_Woocommerce;
+if ( ! class_exists( 'Insert_Into_Woocommerce_Pro' ) ) {
+	new Insert_Into_Woocommerce;
+}
