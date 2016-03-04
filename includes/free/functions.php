@@ -192,7 +192,7 @@ function mdc_woo_disable_wysiwyg( $default ){
 add_action( 'admin_head', 'mdc_woo_enqueue_scripts' );
 function mdc_woo_enqueue_scripts(){
 	global $post;
-	if( $post->post_type === 'woo-block' || get_post_type() === 'woo-block' ){
+	if( ( isset( $_GET['page'] ) && $_GET['page'] == 'insert-into-woocommerce-settings' ) || $post->post_type === 'woo-block' || get_post_type() === 'woo-block' ){
 		?>
 		<script type="text/javascript">
 			$ = new jQuery.noConflict();
