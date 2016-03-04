@@ -191,18 +191,18 @@ function mdc_woo_disable_wysiwyg( $default ){
 
 add_action( 'admin_head', 'mdc_woo_enqueue_scripts' );
 function mdc_woo_enqueue_scripts(){
-	?>
-	<style type="text/css">
-		
-	</style>
-	<script type="text/javascript">
-		$ = new jQuery.noConflict();
-		$(document).ready(function(){
-			$("#insert-media-button, #iiw_general .checkbox").prop("disabled",true);
-			$("#wp-content-media-buttons").after('<span>( <a href="<?php echo INSERT_INTO_WOO_PRO_URL; ?>" target="_blank">Upgrade to Pro to enable \'Add Media\' button and WYSIWYG/visual editor</a> )</span>')
-		})
-	</script>
-	<?php
+	global $post;
+	if( $post->post_type === 'woo-block' || get_post_type() === 'woo-block' ){
+		?>
+		<script type="text/javascript">
+			$ = new jQuery.noConflict();
+			$(document).ready(function(){
+				$("#insert-media-button, #iiw_general .checkbox").prop("disabled",true);
+				$("#wp-content-media-buttons").after('<span>( <a href="<?php echo INSERT_INTO_WOO_PRO_URL; ?>" target="_blank">Upgrade to Pro to enable \'Add Media\' button and WYSIWYG/visual editor</a> )</span>')
+			})
+		</script>
+		<?php
+	}
 }
 
 add_filter( 'plugin_action_links_' . plugin_basename(INSERT_INTO_WOO_BASE_FILE), 'mdc_woo_add_action_links', 11 );
